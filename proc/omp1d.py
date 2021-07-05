@@ -3,7 +3,7 @@ import numpy as np
 class Greedy1D(object):
     def __init__(self,A,b,epsilon=1e-4):
         """
-        A : Dictionary Matrix (m x n)
+        A : Dictionary Matrix (n x m, n<m)
         b : Observe Vector (n x 1)
         epsilon : Threshold for Error
         """
@@ -14,7 +14,7 @@ class Greedy1D(object):
     def OMP(self):
         """
         OMP : Orthogornal Matching Pursuit"
-        x : Sparse Representation (n x 1)
+        x : Sparse Representation (m x 1)
         S : Support of x (OneHotVector)
         r : Residual error
         """

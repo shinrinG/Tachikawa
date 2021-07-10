@@ -4,6 +4,7 @@ class Greedy1D(object):
     def __init__(self,A,b,epsilon=1e-4):
         """
         A : Dictionary Matrix (n x m, n<m)
+          : Normalised basis use. 
         b : Observe Vector (n x 1)
         epsilon : Threshold for Error
         """

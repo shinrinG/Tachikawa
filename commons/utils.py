@@ -31,4 +31,4 @@ class logger:
         #Write
         with open(self._path, "a") as f:
             f.write(linetxt)
-
+            

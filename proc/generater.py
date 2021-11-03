@@ -53,7 +53,13 @@ class NormRectSignal(baseSignal):
         self.m_upx = upx
         self.m_width = width
 
+    def update(self,upx,width):
+        self.m_upx = upx
+        self.m_width = width
+
     def calc(self):
         for i in range(self.m_len):
             if (self.m_x[i] >= self.m_upx )and( self.m_x[i] <= (self.m_upx +self.m_width)):
                 self.m_y[i] = 1.0/self.m_width
+            else:
+                self.m_y[i] = 0.0

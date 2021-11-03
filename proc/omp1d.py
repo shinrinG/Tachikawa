@@ -11,6 +11,9 @@ class Greedy1D(object):
         self.A=A
         self.b=b
         self.epsilon = epsilon
+        self.itrhist=[]
+        self.reshist=[]
+        self.addhist=[]
 
     def OMP(self):
         """
@@ -20,11 +23,15 @@ class Greedy1D(object):
         r : Residual error
         """
         #Initialize
-
+        self.reshist=[]
+        self.addhist=[]
+        self.itrhist=[]
+        cur_itr = 0
         x = np.zeros(self.A.shape[1])
         S = np.zeros(self.A.shape[1],dtype=np.uint8)
         r = self.b.copy()
         rr = np.dot(r,r)
+        target = 0
 
         for _ in range(self.A.shape[1]):
             #Calc Error
@@ -32,7 +39,8 @@ class Greedy1D(object):
 
             #Update Support
             ndx = np.where(S==0)[0]
-            S[ndx[err.argmin()]] = 1
+            target = ndx[err.argmin()]
+            S[target] = 1
 
             #Update Representation
             As = self.A[:,S==1]
@@ -42,7 +50,11 @@ class Greedy1D(object):
             #Update Residual error
             r = self.b - np.dot(self.A, x)
             rr = np.dot(r, r)
-            if rr < self.eps:
+            self.itrhist.append(cur_itr)
+            self.reshist.append(rr)
+            self.addhist.append(target)
+            cur_itr+=1
+            if rr < self.epsilon:
                 break
         
         return x,S
